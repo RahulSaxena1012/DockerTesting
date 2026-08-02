@@ -1,0 +1,22 @@
+services:
+  api:
+
+    image: api
+
+  aadvik:
+    image: aadvik
+
+  tests:
+
+    build: .
+
+    volumes:
+
+      - .:/app
+
+    depends_on:
+
+      - api
+      - aadvik
+
+    command: pytest -m smoke --alluredir=allure-results
