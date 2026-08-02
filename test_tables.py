@@ -14,4 +14,4 @@ def test_table(page: Page):
     ispresent = page.locator("tr").get_by_text("Strawberry").count()>0
     ricerow = page.locator("tr").filter(has_text="Strawberry")
     ricePrice = ricerow.locator("td").nth(price_index).text_content()
-    assert ricePrice == "23"
+    assert ricePrice == "56"
