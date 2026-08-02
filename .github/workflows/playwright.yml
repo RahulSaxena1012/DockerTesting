@@ -11,3 +11,23 @@ on:
 jobs:
   tests:
     runs-on: ubuntu-latest
+    steps:
+
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Build Docker Image
+        run: docker build -t playwright-tests .
+
+      - name: Run Tests
+        run: |
+          docker run --rm \
+            -v ${{ github.workspace }}/allure-results:/app/allure-results \
+            playwright-tests
+
+      - name: Upload Allure Results
+        uses: actions/upload-artifact@v4
+
+        with:
+          name: allure-results
+          path: allure-results
